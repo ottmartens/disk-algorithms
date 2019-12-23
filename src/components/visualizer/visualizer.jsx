@@ -36,7 +36,7 @@ const Visualizer = ({
 
   useEffect(() => {
     reset();
-  }, [pattern]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [pattern, algorithm]); //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (started) {
@@ -53,11 +53,17 @@ const Visualizer = ({
   };
 
   const step = () => {
-
     let position;
 
     switch (algorithm) {
       case 'FCFS':
+        position = unvisitedPositions.shift();
+        break;
+      case 'SSTF':
+        const lastPosition = scannedPositions[scannedPositions.length - 1];
+        unvisitedPositions.sort(
+          (a, b) => Math.abs(a - lastPosition) - Math.abs(b - lastPosition)
+        );
         position = unvisitedPositions.shift();
         break;
       default:
