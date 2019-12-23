@@ -25,7 +25,7 @@ const Visualizer = ({
 }) => {
   const [stepCount, setStepCount] = useState(0);
   const [scannedPositions, setScannedPositions] = useState([10]);
-  const [unvisitedPositions, setUnvisitedPositions] = useState(pattern);
+  const [unvisitedPositions, setUnvisitedPositions] = useState(pattern.slice(0));
 
   useInterval(
     () => {
@@ -36,7 +36,14 @@ const Visualizer = ({
 
   useEffect(() => {
     reset();
+    setStarted(false);
   }, [pattern, algorithm]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (started) {
+      reset();
+    }
+  }, [started]); //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (started) {
@@ -47,12 +54,13 @@ const Visualizer = ({
 
   const reset = () => {
     setStepCount(0);
-    setUnvisitedPositions(pattern);
+    setUnvisitedPositions(pattern.slice(0));
     setScannedPositions([10]);
-    setStarted(false);
   };
 
   const step = () => {
+    const lastPosition = scannedPositions[scannedPositions.length - 1];
+
     let position;
 
     switch (algorithm) {
@@ -60,11 +68,27 @@ const Visualizer = ({
         position = unvisitedPositions.shift();
         break;
       case 'SSTF':
-        const lastPosition = scannedPositions[scannedPositions.length - 1];
         unvisitedPositions.sort(
           (a, b) => Math.abs(a - lastPosition) - Math.abs(b - lastPosition)
         );
         position = unvisitedPositions.shift();
+        break;
+      case 'SCAN':
+        const isRightDirection =
+          !!unvisitedPositions.find(p => p >= lastPosition) ||
+          !scannedPositions.includes(49);
+
+        if (isRightDirection) {
+          position =
+            unvisitedPositions
+              .filter(p => p >= lastPosition)
+              .sort((a, b) => a - b)[0] || 49;
+          if (unvisitedPositions.includes(position)) {
+            unvisitedPositions.splice(unvisitedPositions.indexOf(position), 1);
+          }
+        } else {
+          position = unvisitedPositions.sort((a, b) => a - b).pop();
+        }
         break;
       default:
         break;
