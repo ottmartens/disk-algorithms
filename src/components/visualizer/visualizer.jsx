@@ -25,7 +25,9 @@ const Visualizer = ({
 }) => {
   const [stepCount, setStepCount] = useState(0);
   const [scannedPositions, setScannedPositions] = useState([10]);
-  const [unvisitedPositions, setUnvisitedPositions] = useState(pattern.slice(0));
+  const [unvisitedPositions, setUnvisitedPositions] = useState(
+    pattern.slice(0)
+  );
 
   useInterval(
     () => {
@@ -74,15 +76,19 @@ const Visualizer = ({
         position = unvisitedPositions.shift();
         break;
       case 'SCAN':
+      case 'LOOK':
+        const isScan = algorithm === 'SCAN';
+
         const isRightDirection =
           !!unvisitedPositions.find(p => p >= lastPosition) ||
-          !scannedPositions.includes(49);
+          (isScan && !scannedPositions.includes(49));
 
         if (isRightDirection) {
           position =
             unvisitedPositions
               .filter(p => p >= lastPosition)
-              .sort((a, b) => a - b)[0] || 49;
+              .sort((a, b) => a - b)[0] ||
+            (isScan && 49);
           if (unvisitedPositions.includes(position)) {
             unvisitedPositions.splice(unvisitedPositions.indexOf(position), 1);
           }
@@ -151,7 +157,7 @@ const Visualizer = ({
           />
         </LineChart>
       </ResponsiveContainer>
-      <Counter stepCount={stepCount} />
+      <Counter scannedPositions={scannedPositions} stepCount={stepCount} />
     </div>
   );
 };

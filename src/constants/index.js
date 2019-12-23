@@ -21,6 +21,8 @@ export const algoOptions = [
 
 export const timelineOptions = [
   '1,10,44,2,12,3,13,20',
+  '2,5,13,29,7,1,18,40,49,4',
+  '45,6,16,9,33,28,11,37,49,25',
   'custom'
 ];
 
