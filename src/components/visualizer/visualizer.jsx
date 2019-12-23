@@ -25,13 +25,18 @@ const Visualizer = ({
 }) => {
   const [stepCount, setStepCount] = useState(0);
   const [scannedPositions, setScannedPositions] = useState([10]);
+  const [unvisitedPositions, setUnvisitedPositions] = useState(pattern);
 
   useInterval(
     () => {
       step();
     },
-    started ? 500 : null
+    started ? 700 : null
   );
+
+  useEffect(() => {
+    reset();
+  }, [pattern]); //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (started) {
@@ -40,12 +45,32 @@ const Visualizer = ({
     }
   }, [setError, started]);
 
+  const reset = () => {
+    setStepCount(0);
+    setUnvisitedPositions(pattern);
+    setScannedPositions([10]);
+    setStarted(false);
+  };
+
   const step = () => {
-    if (stepCount > 6) setStarted(false);
-    setScannedPositions(
-      scannedPositions.concat([Math.floor(Math.random() * 50)])
-    );
+
+    let position;
+
+    switch (algorithm) {
+      case 'FCFS':
+        position = unvisitedPositions.shift();
+        break;
+      default:
+        break;
+    }
+
+    setScannedPositions(scannedPositions.concat([position]));
+
     setStepCount(stepCount + 1);
+
+    if (unvisitedPositions.length === 0) {
+      setStarted(false);
+    }
   };
 
   return (

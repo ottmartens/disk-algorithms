@@ -4,13 +4,17 @@ const parseTimelineString = (timelineString, setError) => {
 
     const processData = timelineString.split(',');
 
+    let pattern = [];
+
     processData.forEach(value => {
       if (value === '' || isNaN(Number(value)) || Number(value) > 49) {
         throw new Error();
+      } else {
+        pattern.push(Number(value));
       }
     });
 
-    return processData;
+    return pattern;
   } catch (err) {
     setError('Invalid rotation pattern!');
   }
