@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/disk-algorithms/static/css/main.e29228ca.chunk.css",
-    "main.js": "/disk-algorithms/static/js/main.6066cc40.chunk.js",
-    "main.js.map": "/disk-algorithms/static/js/main.6066cc40.chunk.js.map",
+    "main.js": "/disk-algorithms/static/js/main.5423791f.chunk.js",
+    "main.js.map": "/disk-algorithms/static/js/main.5423791f.chunk.js.map",
     "runtime-main.js": "/disk-algorithms/static/js/runtime-main.cdde81c1.js",
     "runtime-main.js.map": "/disk-algorithms/static/js/runtime-main.cdde81c1.js.map",
     "static/js/2.f53a4680.chunk.js": "/disk-algorithms/static/js/2.f53a4680.chunk.js",
     "static/js/2.f53a4680.chunk.js.map": "/disk-algorithms/static/js/2.f53a4680.chunk.js.map",
     "index.html": "/disk-algorithms/index.html",
-    "precache-manifest.af8150c083beb510575d6d08d57bb250.js": "/disk-algorithms/precache-manifest.af8150c083beb510575d6d08d57bb250.js",
+    "precache-manifest.d83113e8fcbc4054b75ab3a26841b0d0.js": "/disk-algorithms/precache-manifest.d83113e8fcbc4054b75ab3a26841b0d0.js",
     "service-worker.js": "/disk-algorithms/service-worker.js",
     "static/css/main.e29228ca.chunk.css.map": "/disk-algorithms/static/css/main.e29228ca.chunk.css.map",
     "static/js/2.f53a4680.chunk.js.LICENSE": "/disk-algorithms/static/js/2.f53a4680.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.cdde81c1.js",
     "static/js/2.f53a4680.chunk.js",
     "static/css/main.e29228ca.chunk.css",
-    "static/js/main.6066cc40.chunk.js"
+    "static/js/main.5423791f.chunk.js"
   ]
 }
